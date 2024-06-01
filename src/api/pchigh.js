@@ -4,7 +4,7 @@ import request from '@/utils/request'
 
 export function getPcHighOrderList(data) {
     return request({
-        url: 'https://apple.xinbi.com/pcHigh/order',
+        url: '/pcHigh/order',
         method: 'post',
         data
     })
@@ -13,14 +13,14 @@ export function getPcHighOrderList(data) {
 
 export function getPcHighGroupAll(data) {
     return request({
-        url: 'https://apple.xinbi.com/pcHigh/groupAll',
+        url: '/pcHigh/groupAll',
         method: 'post',
         data
     })
 }
 export function getPcHighGroupDay(data) {
     return request({
-        url: 'https://apple.xinbi.com/pcHigh/groupDay',
+        url: '/pcHigh/groupDay',
         method: 'post',
         data
     })
@@ -28,7 +28,7 @@ export function getPcHighGroupDay(data) {
 
 export function getPcGroupOverView(data) {
     return request({
-        url: 'https://apple.xinbi.com/pcHigh/group/overview',
+        url: '/pcHigh/group/overview',
         method: 'post',
         data
     })

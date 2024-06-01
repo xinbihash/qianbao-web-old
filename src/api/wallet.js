@@ -3,7 +3,7 @@ import request from '@/utils/request'
 export function getWalletBlChangeList(data) {
   return request({
 
-    url: 'https://apple.xinbi.com/wallet/blChange',
+    url: '/wallet/blChange',
     method: 'post',
     data
   })
@@ -11,7 +11,7 @@ export function getWalletBlChangeList(data) {
 
 export function getWalletRechargeList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/recharge',
+    url: '/wallet/recharge',
     method: 'post',
     data
   })
@@ -19,7 +19,7 @@ export function getWalletRechargeList(data) {
 
 export function getWalletWithdrawList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/withdraw',
+    url: '/wallet/withdraw',
     method: 'post',
     data
   })
@@ -27,7 +27,7 @@ export function getWalletWithdrawList(data) {
 
 export function getWalletTransferList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/transfer',
+    url: '/wallet/transfer',
     method: 'post',
     data
   })
@@ -35,7 +35,7 @@ export function getWalletTransferList(data) {
 
 export function getWalletFlashList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/flash',
+    url: '/wallet/flash',
     method: 'post',
     data
   })
@@ -43,7 +43,7 @@ export function getWalletFlashList(data) {
 
 export function getWalletUserList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/user',
+    url: '/wallet/user',
     method: 'post',
     data
   })
@@ -51,7 +51,7 @@ export function getWalletUserList(data) {
 
 export function getUserProfit(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/userProfit',
+    url: '/wallet/userProfit',
     method: 'post',
     data
   })
@@ -60,7 +60,7 @@ export function getUserProfit(data) {
 
 export function getWalletEnvelopeList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/envelope',
+    url: '/wallet/envelope',
     method: 'post',
     data
   })
@@ -68,7 +68,7 @@ export function getWalletEnvelopeList(data) {
 
 export function getWalletEnvelopeInfoList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/envelopeInfo',
+    url: '/wallet/envelopeInfo',
     method: 'post',
     data
   })
@@ -76,7 +76,7 @@ export function getWalletEnvelopeInfoList(data) {
 
 export function getWalletMasterCardList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/masterCard',
+    url: '/wallet/masterCard',
     method: 'post',
     data
   })
@@ -84,7 +84,7 @@ export function getWalletMasterCardList(data) {
 
 export function getWalletGroupList(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/group',
+    url: '/wallet/group',
     method: 'post',
     data
   })
@@ -92,7 +92,7 @@ export function getWalletGroupList(data) {
 
 export function getWalletUserOverview(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/user/overview',
+    url: '/wallet/user/overview',
     method: 'post',
     data
   })
@@ -101,7 +101,7 @@ export function getWalletUserOverview(data) {
 
 export function getWalletUserListOverview(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/user/list',
+    url: '/wallet/user/list',
     method: 'post',
     data
   })
@@ -110,7 +110,7 @@ export function getWalletUserListOverview(data) {
 
 export function getWalletBonusRecord(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/bonusRecord',
+    url: '/wallet/bonusRecord',
     method: 'post',
     data
   })
@@ -118,7 +118,7 @@ export function getWalletBonusRecord(data) {
 
 export function getDayProfitBetAmount(data) {
   return request({
-    url: 'https://apple.xinbi.com/wallet/dayProfitBetAmount',
+    url: '/wallet/dayProfitBetAmount',
     method: 'post',
     data
   })
