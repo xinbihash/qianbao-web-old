@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="app-container">
     <el-table
       v-loading="listLoading"
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList } from '@/api/wallet'
 
 export default {
   filters: {
@@ -76,4 +76,4 @@ export default {
     }
   }
 }
-</script>
+</script> -->

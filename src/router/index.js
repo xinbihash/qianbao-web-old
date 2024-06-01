@@ -51,114 +51,357 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '新币钱包平台', icon: 'dashboard' }
     }]
   },
 
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   hidden: true,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+
   {
-    path: '/example',
+    path: '/wallet',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/wallet/index',
+    name: '新币钱包',
+    meta: { title: '新币钱包', icon: 'el-icon-s-help' },
     children: [
+      // {
+      //   path: 'dashboard',
+      //   name: '钱包概览',
+      //   component: () => import('@/views/wallet/dashboard'),
+      //   meta: { title: '钱包概览', icon: 'dashboard' }
+      // },
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'blchange',
+        name: '资产变动',
+        component: () => import('@/views/wallet/blchange'),
+        meta: { title: '资产变动', icon: 'tree' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'recharge',
+        name: '充值',
+        component: () => import('@/views/wallet/recharge'),
+        meta: { title: '充值', icon: 'tree' }
+      },
+      {
+        path: 'withdraw',
+        name: '提现',
+        component: () => import('@/views/wallet/withdraw'),
+        meta: { title: '提现', icon: 'tree' }
+      },
+      {
+        path: 'transfer',
+        name: '转账',
+        component: () => import('@/views/wallet/transfer'),
+        meta: { title: '转账', icon: 'tree' }
+      },
+      {
+        path: 'bonusrecord',
+        name: '彩金记录',
+        component: () => import('@/views/wallet/bonusrecord'),
+        meta: { title: '彩金记录', icon: 'tree' }
+      },
+      {
+        path: 'profitbetamount',
+        name: '每日流水收益',
+        component: () => import('@/views/wallet/profitbetamount'),
+        meta: { title: '每日流水收益', icon: 'tree' }
+      },
+      {
+        path: 'flash',
+        name: '钱包闪兑',
+        component: () => import('@/views/wallet/flash'),
+        meta: { title: '钱包闪兑', icon: 'tree' }
+      },
+      {
+        path: 'user',
+        name: '用户',
+        component: () => import('@/views/wallet/user'),
+        meta: { title: '用户', icon: 'tree' }
+      },
+      {
+        path: 'envelope',
+        name: '红包',
+        component: () => import('@/views/wallet/envelope'),
+        meta: { title: '红包', icon: 'tree' }
+      },
+      // {
+      //   path: 'envelopeInfo',
+      //   name: '红包详情',
+      //   component: () => import('@/views/wallet/envelopeInfo'),
+      //   meta: { title: '红包详情', icon: 'tree' }
+      // },
+      {
+        path: 'MasterCard',
+        name: '万事达卡',
+        component: () => import('@/views/wallet/mastercard'),
+        meta: { title: '万事达卡', icon: 'tree' }
+      },
+      {
+        path: 'group',
+        name: '群组',
+        component: () => import('@/views/wallet/group'),
+        meta: { title: '群组', icon: 'tree' }
+      },
+      {
+        path: 'userOverview',
+        name: '钱包用户每日统计',
+        component: () => import('@/views/wallet/useroverview'),
+        meta: { title: '钱包用户每日统计', icon: 'tree' }
+      },
+      {
+        path: 'gameOverview',
+        name: '钱包游戏每日统计',
+        component: () => import('@/views/wallet/gameoverview'),
+        meta: { title: '钱包游戏每日统计', icon: 'tree' }
+      },
+      {
+        path: 'userlist',
+        name: '钱包用户数据统计',
+        component: () => import('@/views/wallet/userlist'),
+        meta: { title: '钱包用户数据统计', icon: 'tree' }
+      },
+    ]
+  },
+
+  {
+    path: '/flash',
+    component: Layout,
+    redirect: '/flash/index',
+    name: '闪兑',
+    meta: { title: '闪兑', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dashboard',
+        name: '闪兑概览',
+        component: () => import('@/views/flash/dashboard'),
+        meta: { title: '闪兑概览', icon: 'tree' }
+      },
+      {
+        path: 'recharge',
+        name: '充值',
+        component: () => import('@/views/flash/recharge'),
+        meta: { title: '充值', icon: 'tree' }
+      },
+      {
+        path: 'order',
+        name: '订单',
+        component: () => import('@/views/flash/order'),
+        meta: { title: '订单', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/pchigh',
+    component: Layout,
+    redirect: '/pchigh/index',
+    name: 'pc28高倍',
+    meta: { title: 'pc28高倍', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dashboard',
+        name: '游戏概览',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        meta: { title: '游戏概览', icon: 'tree' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'groupall',
+        name: '群组总览',
+        component: () => import('@/views/pchigh/groupall'),
+        meta: { title: '群组总览', icon: 'tree' }
+      },
+      {
+        path: 'groupday',
+        name: '群组每日概览',
+        component: () => import('@/views/pchigh/groupday'),
+        meta: { title: '群组每日概览', icon: 'tree' }
+      },
+      {
+        path: 'order',
+        name: '投注列表',
+        component: () => import('@/views/pchigh/order'),
+        meta: { title: '投注列表', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/pcnormal',
+    component: Layout,
+    redirect: '/pcnormal/index',
+    name: 'pc28网盘',
+    meta: { title: 'pc28网盘', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dashboard',
+        name: '游戏概览',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '游戏概览', icon: 'tree' }
+      },
+      {
+        path: 'order',
+        name: '投注列表',
+        component: () => import('@/views/pcnormal/order'),
+        meta: { title: '投注列表', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/pcfive',
+    component: Layout,
+    redirect: '/pchigh/index',
+    name: 'pc28-5.0',
+    meta: { title: 'pc28-5.0', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dashboard',
+        name: '游戏概览',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '游戏概览', icon: 'tree' }
+      },
+      // {
+      //   path: 'groupall',
+      //   name: '群组总览',
+      //   component: () => import('@/views/pcfive/groupall'),
+      //   meta: { title: '群组总览', icon: 'tree' }
+      // },
+      // {
+      //   path: 'groupday',
+      //   name: '群组每日概览',
+      //   component: () => import('@/views/pcfive/groupday'),
+      //   meta: { title: '群组每日概览', icon: 'tree' }
+      // },
+      {
+        path: 'order',
+        name: '投注列表',
+        component: () => import('@/views/pcfive/order'),
+        meta: { title: '投注列表', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/pcfoursix',
+    component: Layout,
+    redirect: '/pcfoursix/index',
+    name: 'pc28-4.6',
+    meta: { title: 'pc28-4.6', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dashboard',
+        name: '游戏概览',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '游戏概览', icon: 'tree' }
+      },
+      {
+        path: 'order',
+        name: '投注列表',
+        component: () => import('@/views/pcfoursix/order'),
+        meta: { title: '投注列表', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/mine',
+    component: Layout,
+    redirect: '/mine/index',
+    name: '扫雷',
+    meta: { title: '扫雷', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'recharge',
+        name: '游戏概览',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '游戏概览', icon: 'tree' }
+      },
+      {
+        path: 'order',
+        name: '投注列表',
+        component: () => import('@/views/mine/order'),
+        meta: { title: '投注列表', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/diceauto',
+    component: Layout,
+    redirect: '/diceauto/index',
+    name: '骰子自动',
+    meta: { title: '骰子自动', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'order',
+        name: '骰子自动',
+        component: () => import('@/views/dice/auto'),
+        meta: { title: '骰子自动', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/dicehand',
+    component: Layout,
+    redirect: '/dicehand/index',
+    name: '骰子手动',
+    meta: { title: 'pc28网盘', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'order',
+        name: '骰子手动',
+        component: () => import('@/views/dice/hand'),
+        meta: { title: '骰子手动', icon: 'tree' }
       }
     ]
   },
 
   {
-    path: 'external-link',
+    path: '/diceprivateauto',
     component: Layout,
+    redirect: '/diceprivateauto/index',
+    name: '私聊骰子自动',
+    meta: { title: '私聊骰子自动', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'order',
+        name: '私聊骰子自动',
+        component: () => import('@/views/dice/privateauto'),
+        meta: { title: '私聊骰子自动', icon: 'tree' }
       }
     ]
   },
+  {
+    path: '/diceprivatehand',
+    component: Layout,
+    redirect: '/diceprivatehand/index',
+    name: '私聊骰子手动',
+    meta: { title: '私聊骰子手动', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'order',
+        name: '私聊骰子手动',
+        component: () => import('@/views/dice/privatehand'),
+        meta: { title: '私聊骰子手动', icon: 'tree' }
+      }
+    ]
+  },
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
