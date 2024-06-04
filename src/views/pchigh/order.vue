@@ -273,7 +273,9 @@
     },
     methods: {
       handlerFilter() {
-        this.$refs.tableRef.refresh(true)
+        this.$nextTick(() => {
+          this.$refs.tableRef.refresh(true)
+        })
       }
     }
   }

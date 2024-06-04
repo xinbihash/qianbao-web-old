@@ -5,6 +5,7 @@
         url: '/wallet/blChange',
         method: 'POST',
       }"
+      totalField="code"
       has-query
     >
       <template #query="{ model }">

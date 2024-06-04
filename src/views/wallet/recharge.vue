@@ -7,6 +7,7 @@
           url: '/wallet/recharge',
           method: 'POST',
         }"
+        totalField="code"
         :formatter="formatter"
       >
         <template #query="{ model }">

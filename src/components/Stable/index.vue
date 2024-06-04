@@ -81,7 +81,7 @@ export default {
     },
     totalField: {
       type: String,
-      default: 'count'
+      default: 'Total'
     },
     formatter: Function
   },
@@ -127,7 +127,11 @@ export default {
           const data = res.data
           this.originData = data
           this.dataSource = data[this.rowsField]
-          this.$set(this.pageConfig, 'total', res.code)
+          let total = res
+          this.totalField.split('.').forEach(field => {
+            total = total[field]
+          })
+          this.$set(this.pageConfig, 'total', total)
           this.$emit('result', data)
         })
         .catch(() => {
