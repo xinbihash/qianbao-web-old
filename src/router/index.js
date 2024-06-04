@@ -215,15 +215,9 @@ export const constantRoutes = [
     path: '/pchigh',
     component: Layout,
     redirect: '/pchigh/index',
-    name: 'pc28高倍',
-    meta: { title: 'pc28高倍', icon: 'el-icon-s-help' },
+    name: 'pc28',
+    meta: { title: 'pc28', icon: 'el-icon-s-help' },
     children: [
-      {
-        path: 'dashboard',
-        name: '游戏概览',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '游戏概览', icon: 'tree' }
-      },
       {
         path: 'groupall',
         name: '群组总览',
@@ -244,81 +238,69 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/pcnormal',
-    component: Layout,
-    redirect: '/pcnormal/index',
-    name: 'pc28网盘',
-    meta: { title: 'pc28网盘', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'dashboard',
-        name: '游戏概览',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '游戏概览', icon: 'tree' }
-      },
-      {
-        path: 'order',
-        name: '投注列表',
-        component: () => import('@/views/pcnormal/order'),
-        meta: { title: '投注列表', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/pcfive',
-    component: Layout,
-    redirect: '/pchigh/index',
-    name: 'pc28-5.0',
-    meta: { title: 'pc28-5.0', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'dashboard',
-        name: '游戏概览',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '游戏概览', icon: 'tree' }
-      },
-      // {
-      //   path: 'groupall',
-      //   name: '群组总览',
-      //   component: () => import('@/views/pcfive/groupall'),
-      //   meta: { title: '群组总览', icon: 'tree' }
-      // },
-      // {
-      //   path: 'groupday',
-      //   name: '群组每日概览',
-      //   component: () => import('@/views/pcfive/groupday'),
-      //   meta: { title: '群组每日概览', icon: 'tree' }
-      // },
-      {
-        path: 'order',
-        name: '投注列表',
-        component: () => import('@/views/pcfive/order'),
-        meta: { title: '投注列表', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/pcfoursix',
-    component: Layout,
-    redirect: '/pcfoursix/index',
-    name: 'pc28-4.6',
-    meta: { title: 'pc28-4.6', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'dashboard',
-        name: '游戏概览',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '游戏概览', icon: 'tree' }
-      },
-      {
-        path: 'order',
-        name: '投注列表',
-        component: () => import('@/views/pcfoursix/order'),
-        meta: { title: '投注列表', icon: 'tree' }
-      }
-    ]
-  },
+  // {
+  //   path: '/pcnormal',
+  //   component: Layout,
+  //   redirect: '/pcnormal/index',
+  //   name: 'pc28网盘',
+  //   meta: { title: 'pc28网盘', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       name: '游戏概览',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: '游戏概览', icon: 'tree' }
+  //     },
+  //     {
+  //       path: 'order',
+  //       name: '投注列表',
+  //       component: () => import('@/views/pcnormal/order'),
+  //       meta: { title: '投注列表', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/pcfive',
+  //   component: Layout,
+  //   redirect: '/pchigh/index',
+  //   name: 'pc28-5.0',
+  //   meta: { title: 'pc28-5.0', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       name: '游戏概览',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: '游戏概览', icon: 'tree' }
+  //     },
+  //     {
+  //       path: 'order',
+  //       name: '投注列表',
+  //       component: () => import('@/views/pcfive/order'),
+  //       meta: { title: '投注列表', icon: 'tree' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/pcfoursix',
+  //   component: Layout,
+  //   redirect: '/pcfoursix/index',
+  //   name: 'pc28-4.6',
+  //   meta: { title: 'pc28-4.6', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       name: '游戏概览',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: '游戏概览', icon: 'tree' }
+  //     },
+  //     {
+  //       path: 'order',
+  //       name: '投注列表',
+  //       component: () => import('@/views/pcfoursix/order'),
+  //       meta: { title: '投注列表', icon: 'tree' }
+  //     }
+  //   ]
+  // },
   {
     path: '/mine',
     component: Layout,
