@@ -1,26 +1,7 @@
 <template>
   <div v-loading="loading" class="s-table-box">
-    <el-card v-if="hasQuery" :border="false" class="query-form">
-      <el-form ref="formRef" label-width="70px" :model="model">
-        <el-row :gutter="10">
-          <slot name="query" :model="model" />
-          <el-col v-bind="queryFormGrid" style="text-align: right">
-            <el-button
-              v-if="showQuery"
-              v-waves
-              type="primary"
-              icon="el-icon-search"
-              @click="refresh(false)"
-            >查询</el-button>
-            <el-button
-              v-if="showReset"
-              v-waves
-              icon="el-icon-refresh"
-              @click="reset"
-            >重置</el-button>
-          </el-col>
-        </el-row>
-      </el-form>
+    <el-card v-if="localQuerys.length" :border="false" class="tw-mb-md query-form">
+      <form-create v-model="fapi" :option="queryConfig" :rule="localQuerys" @submit="onSubmit" />
     </el-card>
     <slot name="middle" :data="originData" />
     <el-card :border="false">
@@ -53,36 +34,46 @@
 <script>
 import { handleApi } from '../util'
 import waves from '@/directive/waves' // waves directive
+import formCreate from '@form-create/element-ui'
+
+const defaultGild = {
+  xl: 6,
+  lg: 6,
+  md: 8,
+  sm: 24,
+  xs: 24
+}
 
 const noColumnProps = ['slotName']
 export default {
+  components: {
+    formCreate: formCreate.$form()
+  },
   directives: { waves },
   props: {
-    hasQuery: {
-      type: Boolean,
-      default: false
+    querys: {
+      type: Array,
+      default: () => []
     },
-    showQuery: {
-      type: Boolean,
-      default: true
+    api: {
+      type: [String, Object],
+      required: true
     },
-    showReset: {
-      type: Boolean,
-      default: true
-    },
-    api: [String, Object],
     autoRequest: {
       type: Boolean,
       default: true
     },
-    formatter: Function
+    formatter: {
+      type: Function,
+      default: null
+    }
   },
   data() {
     return {
       loading: false,
+      fapi: null,
       originData: {},
       dataSource: [],
-      model: {},
       pageConfig: {
         currentPage: 1,
         pageSize: 10,
@@ -92,12 +83,57 @@ export default {
       }
     }
   },
+
+  computed: {
+    queryConfig() {
+      const config = {
+        resetBtn: true
+      }
+      return config
+    },
+    localQuerys() {
+      const { querys } = this
+      const _querys = querys.map((item) => {
+        const _item = {
+          ...item,
+          style: {
+            width: '100%'
+          }
+        }
+        if (!this.isInline) {
+          if (!_item.col) {
+            _item.col = {
+              ...defaultGild
+            }
+          } else {
+            _item.col = Object.assign(
+              {
+                ...defaultGild
+              },
+              _item.col
+            )
+          }
+        }
+        _item.wrap = Object.assign({
+          labelWidth: '80px',
+          labelPosition: 'left'
+        }, _item.wrap || {})
+        return _item
+      })
+      return _querys
+    }
+  },
   mounted() {
     if (this.autoRequest) {
       this.loadData()
     }
   },
   methods: {
+    fapiFn(name, ...args) {
+      if (this.fapi) {
+        this.fapi[name](...args)
+      }
+    },
     filterColumnProps(column) {
       const obj = {}
       Object.keys(column).forEach((key) => {
@@ -148,11 +184,14 @@ export default {
       this.refresh(true)
     },
     getParams() {
-      let params = this.model
-      if (this.formatter) {
-        params = this.formatter(params) || params
+      if (this.localQuerys.length) {
+        const params = this.fapi.formData()
+        if (this.formatter) {
+          return this.formatter(params) || params
+        }
+        return params
       }
-      return params
+      return {}
     },
     refresh(flag = false) {
       if (flag) {
@@ -160,8 +199,14 @@ export default {
       }
       this.loadData()
     },
+    onSubmit() {
+      this.refresh(false)
+    },
+    clickQuery() {
+      this.refresh(true)
+    },
     reset() {
-      this.$refs.formRef.resetFields()
+      this.fapi.resetFields()
       this.refresh(true)
     }
   }
@@ -170,10 +215,25 @@ export default {
 
 <style lang="scss" scoped>
 .query-form {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    ::v-deep .el-card__body {
-        padding-bottom: unset !important;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  ::v-deep .el-card__body {
+      padding-bottom: unset !important;
+  }
+}
+.s-table-box {
+  ::v-deep .el-form-item {
+    display: flex;
+    .el-form-item__content {
+      flex: 1;
+      margin-left: 0px !important;
     }
+  }
+  ::v-deep .vxe-table--render-default .vxe-cell {
+    white-space: unset;
+    word-break: break-all;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 </style>

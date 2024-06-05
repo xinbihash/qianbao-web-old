@@ -6,83 +6,8 @@
         url: '/pcHigh/order',
         method: 'POST',
       }"
-      has-query
+      :querys="querys"
     >
-      <template #query="{ model }">
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="群ID" prop="gid">
-            <el-input
-              v-model="model.gid"
-              placeholder="群ID"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户ID" prop="uid">
-            <el-input
-              v-model="model.uid"
-              placeholder="用户ID"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户名" prop="username">
-            <el-input
-              v-model="model.username"
-              placeholder="用户名"
-              @keyup.enter.native="handlerFilter"
-            /></el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="期号" prop="drawNum">
-            <el-input
-              v-model="model.drawNum"
-              placeholder="期号"
-              @keyup.enter.native="handlerFilter"
-            /></el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="订单号" prop="id">
-            <el-input
-              v-model="model.id"
-              placeholder="订单号"
-              @keyup.enter.native="handlerFilter"
-            /></el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="游戏类型" prop="gameType">
-            <Select
-              v-model="model.gameType"
-              placeholder="游戏类型"
-              class="tw-w-full"
-              :options="gameOptions"
-              :default-value="2"
-              @change="handlerFilter"
-            /></el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="订单状态" prop="status">
-            <Select
-              v-model="model.status"
-              placeholder="订单状态"
-              class="tw-w-full"
-              :options="statusOptions"
-              @change="handlerFilter"
-            /></el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="是否私聊" prop="isPrivate">
-            <Select
-              v-model="model.isPrivate"
-              placeholder="是否私聊"
-              class="tw-w-full"
-              :options="privateOptions"
-              @change="handlerFilter"
-            /></el-form-item>
-        </el-col>
-      </template>
       <el-table-column
         label="订单号"
         prop="Id"
@@ -160,7 +85,6 @@
 </template>
 
 <script>
-import Select from '@/components/Select'
 
 const coinTypeMap = {
   1: 'usdt',
@@ -201,7 +125,6 @@ const isPrivateMap = {
 
 export default {
   name: 'WalletRecharge',
-  components: { Select },
   filters: {
     betTypeFilter(betType) {
       return betTypeMap[betType]
@@ -219,60 +142,141 @@ export default {
   data() {
     return {
       statusMap,
-      gameOptions: Object.freeze([
+      /**
+          <el-form-item label="订单状态" prop="status">
+            <Select
+              v-model="model.status"
+              placeholder="订单状态"
+              class="tw-w-full"
+              :options="statusOptions"
+              @change="handlerFilter"
+            /></el-form-item>
+          <el-form-item label="是否私聊" prop="isPrivate">
+            <Select
+              v-model="model.isPrivate"
+              placeholder="是否私聊"
+              class="tw-w-full"
+              :options="privateOptions"
+              @change="handlerFilter"
+            /></el-form-item>
+      </template>
+       */
+      querys: [
         {
-          label: 'PC高倍',
-          value: 2
+          field: 'gid',
+          title: '群ID',
+          props: {
+            placeholder: '群ID'
+          }
         },
         {
-          label: 'PC网盘',
-          value: 4
+          field: 'uid',
+          title: '用户ID',
+          props: {
+            placeholder: '用户ID'
+          }
         },
         {
-          label: 'PC5.0',
-          value: 5
+          field: 'username',
+          title: '用户名',
+          props: {
+            placeholder: '用户名'
+          }
         },
         {
-          label: 'PC4.6',
-          value: 9
+          field: 'drawNum',
+          title: '期号',
+          props: {
+            placeholder: '期号'
+          }
         },
         {
-          label: 'PC硬碰硬',
-          value: 10
+          field: 'id',
+          title: '订单号',
+          props: {
+            placeholder: '订单号'
+          }
+        },
+        {
+          field: 'gameType',
+          title: '游戏类型',
+          type: 'select',
+          value: 2,
+          options: Object.freeze([
+            {
+              label: 'PC高倍',
+              value: 2
+            },
+            {
+              label: 'PC网盘',
+              value: 4
+            },
+            {
+              label: 'PC5.0',
+              value: 5
+            },
+            {
+              label: 'PC4.6',
+              value: 9
+            },
+            {
+              label: 'PC硬碰硬',
+              value: 10
+            }
+          ]),
+          props: {
+            placeholder: '游戏类型'
+          }
+        },
+        {
+          field: 'status',
+          title: '订单状态',
+          type: 'select',
+          options: Object.freeze([
+            {
+              label: '下单',
+              value: 0
+            },
+            {
+              label: '中将',
+              value: 1
+            },
+            {
+              label: '未中将',
+              value: 2
+            },
+            {
+              label: '取消',
+              value: 3
+            },
+            {
+              label: '返本金',
+              value: 4
+            }
+          ]),
+          props: {
+            placeholder: '订单状态'
+          }
+        },
+        {
+          field: 'isPrivate',
+          title: '是否私聊',
+          type: 'select',
+          options: Object.freeze([
+            {
+              label: '私聊',
+              value: 0
+            },
+            {
+              label: '群聊',
+              value: 1
+            }
+          ]),
+          props: {
+            placeholder: '是否私聊'
+          }
         }
-      ]),
-      statusOptions: Object.freeze([
-        {
-          label: '下单',
-          value: 0
-        },
-        {
-          label: '中将',
-          value: 1
-        },
-        {
-          label: '未中将',
-          value: 2
-        },
-        {
-          label: '取消',
-          value: 3
-        },
-        {
-          label: '返本金',
-          value: 4
-        }
-      ]),
-      privateOptions: Object.freeze([
-        {
-          label: '私聊',
-          value: 0
-        },
-        {
-          label: '群聊',
-          value: 1
-        }
-      ])
+      ]
     }
   },
   methods: {

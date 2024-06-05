@@ -2,76 +2,13 @@
   <div class="app-container">
     <s-table
       ref="tableRef"
-      has-query
       :api="{
         url: '/wallet/recharge',
         method: 'POST',
       }"
-      total-field="code"
+      :querys="querys"
       :formatter="formatter"
     >
-      <template #query="{ model }">
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="发送地址">
-            <el-input
-              v-model="model.fromAddress"
-              placeholder="发送地址"
-              @keyup.enter.native="$refs.tableRef.refresh(false)"
-            />
-          </el-form-item></el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="接收地址">
-            <el-input
-              v-model="model.toAddress"
-              placeholder="接收地址"
-              @keyup.enter.native="$refs.tableRef.refresh(false)"
-            />
-          </el-form-item></el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户ID">
-            <el-input
-              v-model="model.uid"
-              placeholder="用户ID"
-              @keyup.enter.native="$refs.tableRef.refresh(false)"
-            />
-          </el-form-item></el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户名">
-            <el-input
-              v-model="model.username"
-              placeholder="用户名"
-              @keyup.enter.native="$refs.tableRef.refresh(false)"
-            />
-          </el-form-item></el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="hash">
-            <el-input
-              v-model="model.hash"
-              placeholder="充值hash"
-              @keyup.enter.native="$refs.tableRef.refresh(false)"
-            />
-          </el-form-item></el-col>
-        <el-col
-          v-bind="{
-            xs: 24,
-            sm: 24,
-            md: 12,
-            lg: 12,
-            xl: 12
-          }"
-        >
-          <el-form-item label="日期">
-            <el-date-picker
-              v-model="model.rangeTime"
-              type="datetimerange"
-              class="tw-w-full"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            />
-          </el-form-item>
-        </el-col>
-      </template>
       <template #table-top="{ data }">
         <el-row type="flex">
           <el-row type="flex" align="middle">
@@ -181,6 +118,65 @@
 <script>
 export default {
   name: 'WalletRecharge',
+  data() {
+    return {
+      querys: [
+        {
+          field: 'fromAddress',
+          title: '发送地址',
+          props: {
+            placeholder: '发送地址'
+          }
+        },
+        {
+          field: 'toAddress',
+          title: '接收地址',
+          props: {
+            placeholder: '接收地址'
+          }
+        },
+        {
+          field: 'uid',
+          title: '用户ID',
+          props: {
+            placeholder: '用户ID'
+          }
+        },
+        {
+          field: 'username',
+          title: '用户名',
+          props: {
+            placeholder: '用户名'
+          }
+        },
+        {
+          field: 'hash',
+          title: 'hash',
+          props: {
+            placeholder: 'hash'
+          }
+        },
+        {
+          field: 'rangeTime',
+          title: '日期',
+          type: 'datePicker',
+          props: {
+            startPlaceholder: '开始日期',
+            endPlaceholder: '结束日期',
+            rangeSeparator: '至',
+            type: 'datetimerange'
+          },
+          col: {
+            xl: 9,
+            lg: 10,
+            md: 12,
+            sm: 24,
+            xs: 24
+          }
+        }
+      ]
+    }
+  },
   methods: {
     formatter(model) {
       const _model = {

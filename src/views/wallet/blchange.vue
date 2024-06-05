@@ -5,48 +5,8 @@
         url: '/wallet/blChange',
         method: 'POST',
       }"
-      totalField="code"
-      has-query
+      :querys="querys"
     >
-      <template #query="{ model }">
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户ID">
-            <el-input
-              v-model="model.uid"
-              placeholder="用户ID"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="用户名">
-            <el-input
-              v-model="model.username"
-              placeholder="用户名"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="类型">
-            <el-input
-              v-model="model.coinType"
-              placeholder="1,2,3,4"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="日期">
-            <el-date-picker
-              v-model="model.date"
-              class="tw-w-full"
-              type="date"
-              placeholder="选择日期"
-            />
-          </el-form-item>
-        </el-col>
-      </template>
       <el-table-column
         label="用户ID"
         prop="Uid"
@@ -128,6 +88,55 @@ export default {
   filters: {
     coinTypeFilter(coinType) {
       return coinTypeMap[coinType]
+    }
+  },
+  /**
+   * <template #query="{ model }">
+        <el-col v-bind="queryFormGrid">
+          <el-form-item label="日期">
+            <el-date-picker
+              v-model="model.date"
+              class="tw-w-full"
+              type="date"
+              placeholder="选择日期"
+            />
+          </el-form-item>
+        </el-col>
+      </template>
+   */
+  data() {
+    return {
+      querys: [
+        {
+          field: 'uid',
+          title: '用户ID',
+          props: {
+            placeholder: '用户ID'
+          }
+        },
+        {
+          field: 'username',
+          title: '用户名',
+          props: {
+            placeholder: '用户名'
+          }
+        },
+        {
+          field: 'coinType',
+          title: '类型',
+          props: {
+            placeholder: '1,2,3,4'
+          }
+        },
+        {
+          field: 'date',
+          title: '日期',
+          type: 'datePicker',
+          props: {
+            placeholder: '选择日期'
+          }
+        }
+      ]
     }
   }
 }

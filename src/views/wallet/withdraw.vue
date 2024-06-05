@@ -7,48 +7,9 @@
         url: '/wallet/withdraw',
         method: 'POST'
       }"
-      has-query
+      :querys="querys"
+      :formatter="formatter"
     >
-      <template #query="{model}">
-        <el-col v-bind="queryFormGrid">
-          <el-form-item prop="uid" label="用户id">
-            <el-input
-              v-model="model.uid"
-              placeholder="用户id"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-bind="queryFormGrid">
-          <el-form-item prop="username" label="用户id">
-            <el-input
-              v-model="model.username"
-              placeholder="用户名"
-              @keyup.enter.native="handlerFilter"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col
-          v-bind="{
-            xs: 24,
-            sm: 24,
-            md: 12,
-            lg: 12,
-            xl: 12
-          }"
-        >
-          <el-form-item prop="rangeTime" label="用户id">
-            <el-date-picker
-              v-model="model.rangeTime"
-              type="datetimerange"
-              class="tw-w-full"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            />
-          </el-form-item>
-        </el-col>
-      </template>
       <template #middle="{ data }">
         <el-card class="tw-mb-md">
           <template #header>
@@ -150,8 +111,8 @@
           <span>{{ row.CreatedAt | dateFormat }}</span>
         </template>
       </el-table-column>
-
-    </s-table></div>
+    </s-table>
+  </div>
 
 </template>
 
@@ -161,18 +122,42 @@ export default ({
   name: 'WalletRecharge',
   data() {
     return {
-      UsdtCnt: 0,
-      TrxCnt: 0,
-      UsdtSum: 0,
-      TrxSum: 0,
-      UsdtFeeSum: 0,
-      TrxFeeSum: 0,
-      UsdtRealSum: 0,
-      TrxRealSum: 0,
-      downloadLoading: false
+      querys: [
+        {
+          field: 'uid',
+          title: '用户id',
+          props: {
+            placeholder: '用户id'
+          }
+        },
+        {
+          field: 'username',
+          title: '用户名',
+          props: {
+            placeholder: '用户名'
+          }
+        },
+        {
+          field: 'rangeTime',
+          title: '日期',
+          type: 'datePicker',
+          props: {
+            startPlaceholder: '开始日期',
+            endPlaceholder: '结束日期',
+            rangeSeparator: '至',
+            type: 'datetimerange'
+          },
+          col: {
+            xl: 8,
+            lg: 9,
+            md: 12,
+            sm: 24,
+            xs: 24
+          }
+        }
+      ]
     }
   },
-
   methods: {
     formatter(model) {
       const _model = {
@@ -187,8 +172,6 @@ export default ({
     handlerFilter() {
       this.$refs.tableRef.refresh()
     }
-
   }
-
 })
 </script>
