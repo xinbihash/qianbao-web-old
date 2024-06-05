@@ -6,6 +6,7 @@
         method: 'POST',
       }"
       :querys="querys"
+      :formatter="formatter"
     >
       <el-table-column
         label="用户ID"
@@ -90,20 +91,6 @@ export default {
       return coinTypeMap[coinType]
     }
   },
-  /**
-   * <template #query="{ model }">
-        <el-col v-bind="queryFormGrid">
-          <el-form-item label="日期">
-            <el-date-picker
-              v-model="model.date"
-              class="tw-w-full"
-              type="date"
-              placeholder="选择日期"
-            />
-          </el-form-item>
-        </el-col>
-      </template>
-   */
   data() {
     return {
       querys: [
@@ -137,6 +124,14 @@ export default {
           }
         }
       ]
+    }
+  },
+  methods: {
+    formatter(data) {
+      if (data.uid) {
+        data.uid = Number(data.uid)
+      }
+      return data
     }
   }
 }

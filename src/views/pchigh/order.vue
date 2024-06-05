@@ -7,6 +7,7 @@
         method: 'POST',
       }"
       :querys="querys"
+      :formatter="formatter"
     >
       <el-table-column
         label="订单号"
@@ -142,33 +143,7 @@ export default {
   data() {
     return {
       statusMap,
-      /**
-          <el-form-item label="订单状态" prop="status">
-            <Select
-              v-model="model.status"
-              placeholder="订单状态"
-              class="tw-w-full"
-              :options="statusOptions"
-              @change="handlerFilter"
-            /></el-form-item>
-          <el-form-item label="是否私聊" prop="isPrivate">
-            <Select
-              v-model="model.isPrivate"
-              placeholder="是否私聊"
-              class="tw-w-full"
-              :options="privateOptions"
-              @change="handlerFilter"
-            /></el-form-item>
-      </template>
-       */
       querys: [
-        {
-          field: 'gid',
-          title: '群ID',
-          props: {
-            placeholder: '群ID'
-          }
-        },
         {
           field: 'uid',
           title: '用户ID',
@@ -284,6 +259,12 @@ export default {
       this.$nextTick(() => {
         this.$refs.tableRef.refresh(true)
       })
+    },
+    formatter(data) {
+      if (data.uid) {
+        data.uid = Number(data.uid)
+      }
+      return data
     }
   }
 }
