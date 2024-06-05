@@ -75,14 +75,6 @@ export default {
       type: Boolean,
       default: true
     },
-    rowsField: {
-      type: String,
-      default: 'Data'
-    },
-    totalField: {
-      type: String,
-      default: 'Total'
-    },
     formatter: Function
   },
   data() {
@@ -126,12 +118,16 @@ export default {
         .then((res) => {
           const data = res.data
           this.originData = data
-          this.dataSource = data[this.rowsField]
-          let total = res
-          this.totalField.split('.').forEach(field => {
-            total = total[field]
-          })
-          this.$set(this.pageConfig, 'total', total)
+          if (data) {
+            if (Array.isArray(data)) {
+              this.dataSource = data
+            } else {
+              this.dataSource = data.Data
+            }
+          } else {
+            this.dataSource = []
+          }
+          this.$set(this.pageConfig, 'total', res.total)
           this.$emit('result', data)
         })
         .catch(() => {
