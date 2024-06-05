@@ -15,12 +15,6 @@
       />
 
       <el-table-column
-        label="群ID"
-        prop="GroupId"
-        show-overflow-tooltip
-      />
-
-      <el-table-column
         label="群主ID"
         prop="OwnerId"
         show-overflow-tooltip
@@ -163,13 +157,6 @@ export default {
        */
       querys: [
         {
-          field: 'gid',
-          title: '群ID',
-          props: {
-            placeholder: '群ID'
-          }
-        },
-        {
           field: 'uid',
           title: '用户ID',
           props: {
@@ -238,11 +225,11 @@ export default {
               value: 0
             },
             {
-              label: '中将',
+              label: '中奖',
               value: 1
             },
             {
-              label: '未中将',
+              label: '未中奖',
               value: 2
             },
             {
