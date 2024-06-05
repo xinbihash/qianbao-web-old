@@ -12,6 +12,9 @@
             <el-button v-waves class="filter-item" type="primary" icon="el-icon-search"
                 @click="handlerFilter">搜索</el-button>
         </div>
+        <div class="filter-container">
+            <el-tag>用户总余额U：{{ this.usdtTotal }}</el-tag><el-tag>用户总余额T：{{ this.trxTotal }}</el-tag>
+        </div>
         <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%;">
 
             <el-table-column label="ID" prop="id" align="center" width="100">
@@ -181,6 +184,8 @@ export default ({
             downloadLoading: false,
             userProfitData: {},
             userProfitDataVisible: false,
+            usdtTotal: 0,
+            trxTotal: 0
         }
     },
 
@@ -195,7 +200,8 @@ export default ({
             getWalletUserList(this.listQuery).then(response => {
                 this.list = response.data
                 this.total = response.code
-
+                this.usdtTotal = response.usdtTotal
+                this.trxTotal = response.trxTotal
                 // Just to simulate the time of the request
                 setTimeout(() => {
                     this.listLoading = false
