@@ -4,13 +4,17 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+import zh from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 
 import '@/styles/index.scss' // global css
+import Stable from '@/components/Stable'
+import './styles/tailwindcss-output.css'
 
 import App from './App'
 import store from './store'
 import router from './router'
+
+import './filter'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -28,16 +32,28 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
-// set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
-// 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+Vue.use(ElementUI, { locale: zh })
+Vue.component('s-table', Stable)
 
 Vue.config.productionTip = false
+
+Vue.mixin({
+  data() {
+    return {
+      queryFormGrid: {
+        xs: 24,
+        sm: 24,
+        md: 8,
+        lg: 6,
+        xl: 6
+      }
+    }
+  }
+})
 
 new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 })
