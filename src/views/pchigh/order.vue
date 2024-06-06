@@ -243,11 +243,11 @@ export default {
               value: -1
             },
             {
-              label: '私聊',
+              label: '群聊',
               value: 0
             },
             {
-              label: '群聊',
+              label: '私聊',
               value: 1
             }
           ]),
@@ -267,6 +267,9 @@ export default {
     formatter(data) {
       if (data.uid) {
         data.uid = Number(data.uid)
+      }
+      if (data.drawNum) {
+        data.drawNum = Number(data.drawNum)
       }
       return data
     }
