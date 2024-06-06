@@ -201,7 +201,12 @@ export default {
           field: 'status',
           title: '订单状态',
           type: 'select',
+          value: -1,
           options: Object.freeze([
+            {
+              label: '全部',
+              value: -1
+            },
             {
               label: '下单',
               value: 0
@@ -231,13 +236,18 @@ export default {
           field: 'isPrivate',
           title: '是否私聊',
           type: 'select',
+          value: -1,
           options: Object.freeze([
             {
-              label: '私聊',
-              value: 0
+              label: '全部',
+              value: -1
             },
             {
               label: '群聊',
+              value: 0
+            },
+            {
+              label: '私聊',
               value: 1
             }
           ]),
@@ -257,6 +267,9 @@ export default {
     formatter(data) {
       if (data.uid) {
         data.uid = Number(data.uid)
+      }
+      if (data.drawNum) {
+        data.drawNum = Number(data.drawNum)
       }
       return data
     }

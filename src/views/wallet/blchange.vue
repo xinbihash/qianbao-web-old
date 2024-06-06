@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 const coinTypeMap = {
   1: 'usdt',
   2: 'trx',
@@ -130,6 +132,9 @@ export default {
     formatter(data) {
       if (data.uid) {
         data.uid = Number(data.uid)
+      }
+      if (data.date) {
+        data.date = dayjs(data.date).startOf('day').toISOString()
       }
       return data
     }
