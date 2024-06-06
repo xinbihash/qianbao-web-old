@@ -116,6 +116,9 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+import { rangePickerOption } from '@/utils'
+
 export default {
   name: 'WalletRecharge',
   data() {
@@ -164,7 +167,8 @@ export default {
             startPlaceholder: '开始日期',
             endPlaceholder: '结束日期',
             rangeSeparator: '至',
-            type: 'datetimerange'
+            type: 'daterange',
+            pickerOptions: rangePickerOption()
           },
           col: {
             xl: 9,
@@ -183,8 +187,8 @@ export default {
         ...model
       }
       if (_model.rangeTime != null && _model.rangeTime.length) {
-        _model.fromTime = _model.rangeTime[0]
-        _model.toTime = _model.rangeTime[1]
+        _model.fromTime = dayjs(_model.rangeTime[0]).toISOString()
+        _model.toTime = dayjs(_model.rangeTime[1]).toISOString()
       }
       if (_model.uid) {
         _model.uid = Number(_model.uid)

@@ -1,6 +1,4 @@
-/**
- * Created by PanJiaChen on 16/11/18.
- */
+import dayjs from 'dayjs'
 
 /**
  * Parse the time to string
@@ -114,4 +112,30 @@ export function param2Obj(url) {
     }
   })
   return obj
+}
+
+export function rangePickerOption() {
+  return {
+    shortcuts: [{
+      text: '今天',
+      onClick(picker) {
+        picker.$emit('pick', [dayjs().startOf('day').toDate(), dayjs().endOf('day').toDate()])
+      }
+    }, {
+      text: '昨天',
+      onClick(picker) {
+        picker.$emit('pick', [dayjs().subtract(1, 'day').startOf('day').toDate(), dayjs().subtract(1, 'day').endOf('day').toDate()])
+      }
+    }, {
+      text: '近七天',
+      onClick(picker) {
+        picker.$emit('pick', [dayjs().subtract(1, 'week').startOf('day').toDate(), dayjs().endOf('day').toDate()])
+      }
+    }, {
+      text: '近一个月',
+      onClick(picker) {
+        picker.$emit('pick', [dayjs().subtract(1, 'month').startOf('day').toDate(), dayjs().endOf('day').toDate()])
+      }
+    }]
+  }
 }
