@@ -129,7 +129,7 @@ export function rangePickerOption() {
     }, {
       text: '近七天',
       onClick(picker) {
-        picker.$emit('pick', [dayjs().subtract(1, 'week').startOf('day').toDate(), dayjs().endOf('day').toDate()])
+        picker.$emit('pick', [dayjs().subtract(6, 'day').startOf('day').toDate(), dayjs().endOf('day').toDate()])
       }
     }, {
       text: '近一个月',
