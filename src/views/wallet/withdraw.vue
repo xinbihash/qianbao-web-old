@@ -167,8 +167,8 @@ export default ({
         ...model
       }
       if (_model.rangeTime != null && _model.rangeTime.length) {
-        _model.fromTime = dayjs(_model.rangeTime[0]).toISOString()
-        _model.toTime = dayjs(_model.rangeTime[1]).toISOString()
+        _model.fromTime = dayjs(_model.rangeTime[0]).startOf('day').toISOString()
+        _model.toTime = dayjs(_model.rangeTime[1]).endOf('day').toISOString()
       }
       if (_model.uid) {
         _model.uid = Number(_model.uid)
