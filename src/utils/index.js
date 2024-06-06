@@ -119,7 +119,7 @@ export function rangePickerOption() {
     shortcuts: [{
       text: '今天',
       onClick(picker) {
-        picker.$emit('pick', [dayjs().startOf('day').toDate(), dayjs().endOf('day').toDate()])
+        picker.$emit('pick', [dayjs().startOf('day').toDate(), dayjs().toDate()])
       }
     }, {
       text: '昨天',
