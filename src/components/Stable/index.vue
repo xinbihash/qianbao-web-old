@@ -2,6 +2,13 @@
   <div v-loading="loading" class="s-table-box">
     <el-card v-if="localQuerys.length" :border="false" class="tw-mb-md query-form">
       <form-create v-model="fapi" :option="queryConfig" :rule="localQuerys" @submit="onSubmit" />
+      <el-row type="flex" justify="end">
+        <slot name="query-left" />
+        <div>
+          <el-button v-if="showQueryBtn" type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
+          <el-button v-if="showResetBtn" icon="el-icon-refresh" @click="reset">重置</el-button>
+        </div>
+      </el-row>
     </el-card>
     <slot name="middle" :data="originData" />
     <el-card :border="false">
@@ -51,6 +58,14 @@ export default {
   },
   directives: { waves },
   props: {
+    showQueryBtn: {
+      type: Boolean,
+      default: true
+    },
+    showResetBtn: {
+      type: Boolean,
+      default: true
+    },
     querys: {
       type: Array,
       default: () => []
@@ -87,7 +102,8 @@ export default {
   computed: {
     queryConfig() {
       const config = {
-        resetBtn: true
+        resetBtn: false,
+        submitBtn: false
       }
       return config
     },

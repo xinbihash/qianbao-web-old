@@ -201,7 +201,12 @@ export default {
           field: 'status',
           title: '订单状态',
           type: 'select',
+          value: -1,
           options: Object.freeze([
+            {
+              label: '全部',
+              value: -1
+            },
             {
               label: '下单',
               value: 0
@@ -231,7 +236,12 @@ export default {
           field: 'isPrivate',
           title: '是否私聊',
           type: 'select',
+          value: -1,
           options: Object.freeze([
+            {
+              label: '全部',
+              value: -1
+            },
             {
               label: '私聊',
               value: 0
