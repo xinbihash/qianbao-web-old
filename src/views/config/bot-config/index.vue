@@ -10,21 +10,43 @@
       show-add
       @addClick="addClick"
     >
-      <el-table-column label="ID" prop="ID" />
-      <el-table-column label="机器人类型" prop="BotType" />
-      <el-table-column label="状态" prop="Status" />
-      <el-table-column label="按钮名称" prop="ButtonName" />
-      <el-table-column label="跳转地址" prop="JumpUrl" />
-      <el-table-column label="备注" prop="Note" />
-      <el-table-column label="创建时间" prop="CreateAt" />
-      <el-table-column label="更新时间" prop="UpdateAt" />
+      <el-table-column show-overflow-tooltip label="ID" prop="primaryKey" width="70px">
+        <template #default="{row}">
+          <span class="tw-font-bold tw-text-md">
+            {{ row.primaryKey }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column label="状态" prop="status" width="50px">
+        <template #default="{row}">
+          <el-link :type="row.status == 0 ? 'danger' : 'success'">
+            {{ statusMap[row.status] }}
+          </el-link>
+        </template>
+      </el-table-column>
+      <el-table-column label="排序" prop="sort" width="50px" />
+      <el-table-column label="机器人类型" prop="botType">
+        <template #default="{row}">{{ botTypeMap[row.botType] }}</template>
+      </el-table-column>
+      <el-table-column show-overflow-tooltip label="按钮名称" prop="buttonName" />
+      <el-table-column show-overflow-tooltip label="跳转地址" prop="jumpUrl" />
+      <el-table-column show-overflow-tooltip label="备注" prop="note" />
+      <el-table-column show-overflow-tooltip label="创建时间" prop="createdAt">
+        <template #default="{row}">{{ row.createdAt | dateFormat }}</template>
+      </el-table-column>
+      <el-table-column show-overflow-tooltip label="更新时间" prop="updatedAt">
+        <template #default="{row}">{{ row.updatedAt | dateFormat }}</template>
+      </el-table-column>
+      <el-table-column label="操作" prop="operation" width="50px">
+        <template #default="{row}">
+          <el-link type="danger" @click="del(row)">删除</el-link>
+        </template>
+      </el-table-column>
     </s-table>
   </div>
 </template>
 
 <script>
-import modalForm from '@/utils/modalForm'
-
 function getOptions(botTypeOptions, isQuery = false) {
   const options = [...botTypeOptions]
   if (isQuery) {
@@ -35,35 +57,33 @@ function getOptions(botTypeOptions, isQuery = false) {
   }
   return options
 }
-const botTypeOptions = [
-  {
-    label: '下单bot',
-    value: 1
-  },
-  {
-    label: '开奖bot',
-    value: 2
-  },
-  {
-    label: '管理bot',
-    value: 3
-  }
-]
-const statusOptions = [
-  {
-    label: '启用',
-    value: 1
-  },
-  {
-    label: '禁用',
-    value: 0
-  }
-]
+
+function mapToOptions(map, isNumber = true) {
+  return Object.keys(map).map(key => ({
+    label: map[key],
+    value: isNumber ? Number(key) : key
+  }))
+}
+
+const botTypeMap = {
+  1: '下单bot',
+  2: '开奖bot',
+  3: '管理bot'
+}
+
+const statusMap = {
+  1: '启用',
+  0: '禁用'
+}
+const botTypeOptions = mapToOptions(botTypeMap)
+const statusOptions = mapToOptions(statusMap)
 
 export default {
   name: 'Config',
   data() {
     return {
+      botTypeMap,
+      statusMap,
       querys: [
         {
           type: 'select',
@@ -93,7 +113,7 @@ export default {
   },
   methods: {
     addClick() {
-      modalForm.call(this, Promise.resolve({
+      this.$modalForm(Promise.resolve({
         status: 200,
         data: {
           config: {
@@ -119,6 +139,10 @@ export default {
             }).validate([
               { required: true, type: 'string', message: '请输入跳转路径' }
             ]),
+            this.$formCreate.maker.inputNumber('排序', 'sort', '', {
+              placeholder: '排序',
+              class: 'tw-w-full'
+            }),
             this.$formCreate.maker.input('备注', 'note', '', {
               placeholder: '备注'
             })
@@ -132,11 +156,20 @@ export default {
         .then(() => {
           this.$refs.tableRef.refresh(true)
         })
+    },
+    del(row) {
+      this.$modalSure({
+        title: row.buttonName,
+        api: {
+          url: '/botMessageConfig/del',
+          method: 'POST',
+          data: {
+            id: row.primaryKey
+          }
+        }
+      })
+        .then(() => this.$refs.tableRef.refresh(true))
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

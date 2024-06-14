@@ -10,9 +10,9 @@ module.exports = {
         md: '8px',
         lg: '12px',
         xl: '16px',
-        '2xl': '20px',
-      },
-    },
+        '2xl': '20px'
+      }
+    }
   },
-  plugins: [],
-};
+  plugins: []
+}
