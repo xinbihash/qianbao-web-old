@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
+import formCreate from '@form-create/element-ui'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import zh from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
+Vue.use(formCreate)
 Vue.use(ElementUI, { locale: zh })
 Vue.component('s-table', Stable)
 
