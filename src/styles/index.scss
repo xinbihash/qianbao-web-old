@@ -63,3 +63,31 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+
+.modal-form {
+  width: auto;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  box-shadow: unset;
+  border-radius: 6px;
+  padding-bottom: 20px;
+}
+.modal-form .el-message-box__header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+.modal-form .el-message-box__title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+}
+.modal-form .el-message-box__content {
+  padding: 30px 15px 10px;
+}
+.modal-form .el-message-box__headerbtn {
+  // top: 10px;
+  color: #c0c4cc;
+}

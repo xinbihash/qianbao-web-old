@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
 import { rangePickerOption } from '@/utils'
 
 export default {
@@ -162,7 +161,7 @@ export default {
         {
           field: 'rangeTime',
           title: '日期',
-          type: 'datePicker',
+          type: 'el-date-picker',
           props: {
             startPlaceholder: '开始日期',
             endPlaceholder: '结束日期',
@@ -187,8 +186,8 @@ export default {
         ...model
       }
       if (_model.rangeTime != null && _model.rangeTime.length) {
-        _model.fromTime = dayjs(_model.rangeTime[0]).startOf('day').toISOString()
-        _model.toTime = dayjs(_model.rangeTime[1]).endOf('day').toISOString()
+        _model.fromTime = _model.rangeTime[0]
+        _model.toTime = _model.rangeTime[1]
       }
       if (_model.uid) {
         _model.uid = Number(_model.uid)

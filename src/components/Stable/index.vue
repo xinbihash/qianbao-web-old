@@ -1,13 +1,20 @@
 <template>
   <div v-loading="loading" class="s-table-box">
     <el-card v-if="localQuerys.length" :border="false" class="tw-mb-md query-form">
-      <form-create v-model="fapi" :option="queryConfig" :rule="localQuerys" @submit="onSubmit" />
+      <form-create v-model="fapi" :option="queryConfig" :rule="localQuerys" />
       <el-row type="flex" justify="end">
         <slot name="query-left" />
-        <div>
-          <el-button v-if="showQueryBtn" type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
-          <el-button v-if="showResetBtn" icon="el-icon-refresh" @click="reset">重置</el-button>
-        </div>
+      </el-row>
+    </el-card>
+    <el-card class="funs tw-mb-md">
+      <el-row type="flex" justify="space-between">
+        <el-row>
+          <el-button v-if="showAdd" size="mini" type="primary" icon="el-icon-plus" @click="$emit('addClick')">{{ addText }}</el-button>
+        </el-row>
+        <el-row>
+          <el-button size="mini" circle type="info" icon="el-icon-search" @click="clickQuery" />
+          <el-button size="mini" circle type="primary" icon="el-icon-refresh" @click="reset" />
+        </el-row>
       </el-row>
     </el-card>
     <slot name="middle" :data="originData" />
@@ -41,7 +48,6 @@
 <script>
 import { handleApi } from '../util'
 import waves from '@/directive/waves' // waves directive
-import formCreate from '@form-create/element-ui'
 
 const defaultGild = {
   xl: 6,
@@ -53,9 +59,6 @@ const defaultGild = {
 
 const noColumnProps = ['slotName']
 export default {
-  components: {
-    formCreate: formCreate.$form()
-  },
   directives: { waves },
   props: {
     showQueryBtn: {
@@ -65,6 +68,14 @@ export default {
     showResetBtn: {
       type: Boolean,
       default: true
+    },
+    showAdd: {
+      type: Boolean,
+      default: false
+    },
+    addText: {
+      type: String,
+      default: ''
     },
     querys: {
       type: Array,
@@ -215,9 +226,6 @@ export default {
       }
       this.loadData()
     },
-    onSubmit() {
-      this.refresh(false)
-    },
     clickQuery() {
       this.refresh(true)
     },
@@ -238,6 +246,11 @@ export default {
   }
 }
 .s-table-box {
+.funs {
+  ::v-deep .el-card__body {
+    padding: 10px;
+  }
+}
   ::v-deep .el-form-item {
     display: flex;
     .el-form-item__content {

@@ -112,9 +112,28 @@ export default {
         },
         {
           field: 'coinType',
+          type: 'select',
           title: '类型',
+          options: [
+            {
+              label: 'usdt',
+              value: 1
+            },
+            {
+              label: 'trx',
+              value: 2
+            },
+            {
+              label: '彩U',
+              value: 3
+            },
+            {
+              label: '彩T',
+              value: 4
+            }
+          ],
           props: {
-            placeholder: '1,2,3,4'
+            placeholder: '请选择'
           }
         },
         {

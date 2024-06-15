@@ -54,30 +54,6 @@ export const constantRoutes = [
       meta: { title: '新币钱包平台', icon: 'dashboard' }
     }]
   },
-
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   hidden: true,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'el-icon-s-help' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-
   {
     path: '/wallet',
     component: Layout,
@@ -85,12 +61,6 @@ export const constantRoutes = [
     name: '新币钱包',
     meta: { title: '新币钱包', icon: 'el-icon-s-help' },
     children: [
-      // {
-      //   path: 'dashboard',
-      //   name: '钱包概览',
-      //   component: () => import('@/views/wallet/dashboard'),
-      //   meta: { title: '钱包概览', icon: 'dashboard' }
-      // },
       {
         path: 'blchange',
         name: '资产变动',
@@ -180,10 +150,9 @@ export const constantRoutes = [
         name: '钱包用户数据统计',
         component: () => import('@/views/wallet/userlist'),
         meta: { title: '钱包用户数据统计', icon: 'tree' }
-      },
+      }
     ]
   },
-
   {
     path: '/flash',
     component: Layout,
@@ -238,69 +207,6 @@ export const constantRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/pcnormal',
-  //   component: Layout,
-  //   redirect: '/pcnormal/index',
-  //   name: 'pc28网盘',
-  //   meta: { title: 'pc28网盘', icon: 'el-icon-s-help' },
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       name: '游戏概览',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: '游戏概览', icon: 'tree' }
-  //     },
-  //     {
-  //       path: 'order',
-  //       name: '投注列表',
-  //       component: () => import('@/views/pcnormal/order'),
-  //       meta: { title: '投注列表', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/pcfive',
-  //   component: Layout,
-  //   redirect: '/pchigh/index',
-  //   name: 'pc28-5.0',
-  //   meta: { title: 'pc28-5.0', icon: 'el-icon-s-help' },
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       name: '游戏概览',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: '游戏概览', icon: 'tree' }
-  //     },
-  //     {
-  //       path: 'order',
-  //       name: '投注列表',
-  //       component: () => import('@/views/pcfive/order'),
-  //       meta: { title: '投注列表', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/pcfoursix',
-  //   component: Layout,
-  //   redirect: '/pcfoursix/index',
-  //   name: 'pc28-4.6',
-  //   meta: { title: 'pc28-4.6', icon: 'el-icon-s-help' },
-  //   children: [
-  //     {
-  //       path: 'dashboard',
-  //       name: '游戏概览',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: '游戏概览', icon: 'tree' }
-  //     },
-  //     {
-  //       path: 'order',
-  //       name: '投注列表',
-  //       component: () => import('@/views/pcfoursix/order'),
-  //       meta: { title: '投注列表', icon: 'tree' }
-  //     }
-  //   ]
-  // },
   {
     path: '/mine',
     component: Layout,
@@ -352,7 +258,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/diceprivateauto',
     component: Layout,
@@ -383,8 +288,20 @@ export const constantRoutes = [
       }
     ]
   },
-
-
+  {
+    path: '/config',
+    component: Layout,
+    name: 'config',
+    meta: { title: '配置', icon: 'el-icon-setting' },
+    children: [
+      {
+        path: 'bot_config',
+        name: 'bot_config',
+        component: () => import('@/views/config/bot-config'),
+        meta: { title: '机器人配置' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
