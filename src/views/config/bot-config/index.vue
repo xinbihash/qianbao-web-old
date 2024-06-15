@@ -37,8 +37,10 @@
       <el-table-column show-overflow-tooltip label="更新时间" prop="updatedAt">
         <template #default="{row}">{{ row.updatedAt | dateFormat }}</template>
       </el-table-column>
-      <el-table-column label="操作" prop="operation" width="50px">
+      <el-table-column label="操作" prop="operation" width="120px">
         <template #default="{row}">
+          <el-link type="primary" @click="editClick(row)">修改</el-link>
+          <el-divider direction="vertical" />
           <el-link type="danger" @click="del(row)">删除</el-link>
         </template>
       </el-table-column>
@@ -112,6 +114,41 @@ export default {
     }
   },
   methods: {
+    getRules(row) {
+      const rules = [
+        this.$formCreate.maker.select('机器人类型', 'botType', row && row.botType, {
+          placeholder: '机器人类型',
+          class: 'tw-w-full'
+        }).options(getOptions(botTypeOptions)).validate([
+          { required: true, type: 'number', message: '请选择机器人类型' }
+        ]),
+        this.$formCreate.maker.radio('状态', 'status', row && row.status).options(getOptions(statusOptions)),
+        this.$formCreate.maker.input('按钮名称', 'buttonName', row && row.buttonName, {
+          placeholder: '按钮名称'
+        }).validate([
+          { required: true, type: 'string', message: '请输入按钮名称' }
+        ]),
+        this.$formCreate.maker.input('跳转路径', 'jumpUrl', row && row.jumpUrl, {
+          placeholder: '跳转路径'
+        }).validate([
+          { required: true, type: 'string', message: '请输入跳转路径' }
+        ]),
+        this.$formCreate.maker.inputNumber('排序', 'sort', row && row.sort, {
+          placeholder: '排序',
+          class: 'tw-w-full'
+        }),
+        this.$formCreate.maker.input('备注', 'note', row && row.note, {
+          placeholder: '备注'
+        })
+      ]
+      if (row) {
+        rules.push(this.$formCreate.maker.input('id', 'id', row.primaryKey, {
+          placeholder: '机器人类型',
+          class: 'tw-w-full'
+        }).hidden(true))
+      }
+      return rules
+    },
     addClick() {
       this.$modalForm(Promise.resolve({
         status: 200,
@@ -121,34 +158,29 @@ export default {
               labelWidth: '110px'
             }
           },
-          rules: [
-            this.$formCreate.maker.select('机器人类型', 'botType', '', {
-              placeholder: '机器人类型',
-              class: 'tw-w-full'
-            }).options(getOptions(botTypeOptions)).validate([
-              { required: true, type: 'number', message: '请选择机器人类型' }
-            ]),
-            this.$formCreate.maker.radio('状态', 'status', 0).options(getOptions(statusOptions)),
-            this.$formCreate.maker.input('按钮名称', 'buttonName', '', {
-              placeholder: '按钮名称'
-            }).validate([
-              { required: true, type: 'string', message: '请输入按钮名称' }
-            ]),
-            this.$formCreate.maker.input('跳转路径', 'jumpUrl', '', {
-              placeholder: '跳转路径'
-            }).validate([
-              { required: true, type: 'string', message: '请输入跳转路径' }
-            ]),
-            this.$formCreate.maker.inputNumber('排序', 'sort', '', {
-              placeholder: '排序',
-              class: 'tw-w-full'
-            }),
-            this.$formCreate.maker.input('备注', 'note', '', {
-              placeholder: '备注'
-            })
-          ],
+          rules: this.getRules(),
           title: '添加配置',
           action: '/botMessageConfig/add',
+          method: 'POST',
+          status: true
+        }
+      }))
+        .then(() => {
+          this.$refs.tableRef.refresh(true)
+        })
+    },
+    editClick(row) {
+      this.$modalForm(Promise.resolve({
+        status: 200,
+        data: {
+          config: {
+            form: {
+              labelWidth: '110px'
+            }
+          },
+          rules: this.getRules(row),
+          title: '添加配置',
+          action: '/botMessageConfig/edit',
           method: 'POST',
           status: true
         }
